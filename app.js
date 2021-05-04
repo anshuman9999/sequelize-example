@@ -5,7 +5,7 @@ dotenv.config({
     path: "./config.env"
 })
 
-const { sequelize, User } = require("./models")
+const { sequelize, User, Post } = require("./models")
 
 app.use(express.json())
 
@@ -17,6 +17,35 @@ app.post('/api/users', async (req, res) => {
             status: "success",
             data: {
                 user
+            }
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(400).json({
+            status: "fail",
+            message: err.message
+        })
+    }
+})
+
+app.post('/api/posts', async (req, res) => {
+    try {
+        const { userUuid, title, body } = req.body
+        const user = await User.findOne({
+            where: {
+                uuid: userUuid
+            }
+        })
+        const post = await Post.create({
+            title,
+            body,
+            creator_id: user.id
+        })
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                post
             }
         })
     } catch (err) {
