@@ -61,6 +61,6 @@ const PORT = 4000;
 app.listen(PORT, async () => {
     console.log(`Server started at PORT: ${PORT}`)
     await sequelize.authenticate()
-    // await sequelize.sync({ force: true })
+    await sequelize.sync({ force: true })
     console.log("Database Connected!")
 })
