@@ -5,13 +5,15 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.UUIDV4,
             allowNull: false
         },
-        name: {
+        first_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        role: {
-            type: DataTypes.STRING,
-            defaultValue: "user"
+        last_name: {
+            type: DataTypes.STRING
+        },
+        age: {
+            type: DataTypes.INTEGER
         },
         email: {
             type: DataTypes.STRING,
