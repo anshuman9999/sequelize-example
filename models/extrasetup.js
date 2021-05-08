@@ -2,22 +2,31 @@ const applyExtraSetup = (sequelize) => {
     const { user, post, comment, favorite, friend } = sequelize.models
 
     user.hasMany(post, {
-        foreignKey: "creator_id"
+        foreignKey: {
+            name: "creator_id",
+            allowNull: false
+        }
     })
 
     user.hasMany(comment, {
-        foreignKey: "user_id"
+        foreignKey: {
+            name: "user_id",
+            allowNull: false
+        }
     })
 
     post.hasMany(comment, {
-        foreignKey: "post_id"
+        foreignKey: {
+            name: "post_id",
+            allowNull: false
+        }
     })
 
-    user.belongsToMany(post, { through: favorite, foreignKey: "user_id" });
-    post.belongsToMany(user, { through: favorite, foreignKey: "post_id" });
+    user.belongsToMany(post, { through: favorite, foreignKey: { name: "user_id", allowNull: false } });
+    post.belongsToMany(user, { through: favorite, foreignKey: { name: "post_id", allowNull: false } });
 
-    user.belongsToMany(user, { through: friend, as: "friend1", uniqueKey: false, foreignKey: "user1_id" })
-    user.belongsToMany(user, { through: friend, as: "friend2", uniqueKey: false, foreignKey: "user2_id" })
+    user.belongsToMany(user, { through: friend, as: "friend1", uniqueKey: false, foreignKey: { name: "user1_id", allowNull: false } })
+    user.belongsToMany(user, { through: friend, as: "friend2", uniqueKey: false, foreignKey: { name: "user2_id", allowNull: false } })
 
 }
 

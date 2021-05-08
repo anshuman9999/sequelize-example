@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.UUIDV4,
             allowNull: false
         },
-        message: DataTypes.STRING,
+        message: DataTypes.TEXT,
     })
 
     return Comment;
